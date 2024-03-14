@@ -1,6 +1,7 @@
 package com.abreu.todoHexagonal.business.service;
 
 import com.abreu.todoHexagonal.business.exception.BadRequestException;
+import com.abreu.todoHexagonal.business.exception.IllegalArgumentException;
 import com.abreu.todoHexagonal.business.model.Priority;
 import com.abreu.todoHexagonal.business.model.TodoModel;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public class ValidationService {
 
     public void validatePriority(TodoModel priority) {
         if (!Priority.isValid(String.valueOf(priority.priority())))
-            throw new BadRequestException("Invalid priority");
+            throw new IllegalArgumentException("Invalid priority");
     }
 
     public void validatePastDate(TodoModel date) {
@@ -20,6 +21,5 @@ public class ValidationService {
             throw new BadRequestException("Date cannot be in the past");
         }
     }
-
 
 }

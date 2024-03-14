@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -33,7 +32,7 @@ public class TodoController {
         TodoModel todo = service.createTodo(model);
         TodoResponseDto response = mapper.toResponse(todo);
 
-        return ResponseEntity.created(URI.create("/api/v1/todo/" + todo.id())).body(response);
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping
