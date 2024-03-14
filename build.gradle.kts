@@ -37,7 +37,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:3.2.3")
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
     implementation("org.springframework.boot:spring-boot-starter-validation:3.2.3")
-
+    implementation("com.google.code.gson:gson:2.10.1")
 
     compileOnly("org.projectlombok:lombok:1.18.30")
 
