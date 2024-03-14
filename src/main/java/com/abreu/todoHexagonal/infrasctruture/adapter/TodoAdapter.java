@@ -28,7 +28,6 @@ public class TodoAdapter implements TodoPort {
     @Override
     public TodoModel createTodo(TodoModel todo) {
         validationService.validatePastDate(todo);
-        validationService.validatePriority(todo);
         TodoEntity entity = mapper.toEntity(todo);
         TodoEntity saved = repository.save(entity);
         return mapper.toModel(saved);
