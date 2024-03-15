@@ -12,7 +12,8 @@ public record TodoResponseDto(
         String description,
         LocalDate dueDate,
         Priority priority,
-        Boolean status
+        Boolean isLate,
+        Boolean completed
 ) {
 
 }

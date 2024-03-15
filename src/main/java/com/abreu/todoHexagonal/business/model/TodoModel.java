@@ -11,6 +11,7 @@ public record TodoModel(
         String description,
         LocalDate dueDate,
         Priority priority,
-        Boolean status
+        boolean isLate,
+        boolean completed
 ) {
 }
