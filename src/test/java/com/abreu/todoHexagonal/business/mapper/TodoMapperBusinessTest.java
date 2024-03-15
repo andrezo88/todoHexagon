@@ -25,14 +25,14 @@ public class TodoMapperBusinessTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoModel result = INSTANCE_MAPPER.toModel(entity);
@@ -49,14 +49,14 @@ public class TodoMapperBusinessTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(MEDIUM)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.MEDIUM)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoModel result = INSTANCE_MAPPER.toModel(entity);
@@ -73,14 +73,14 @@ public class TodoMapperBusinessTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(LOW)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.LOW)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoModel result = INSTANCE_MAPPER.toModel(entity);
@@ -97,14 +97,14 @@ public class TodoMapperBusinessTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(null)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(null)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoModel result = INSTANCE_MAPPER.toModel(entity);
@@ -120,14 +120,14 @@ public class TodoMapperBusinessTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoEntity result = INSTANCE_MAPPER.toEntity(model);
@@ -143,14 +143,14 @@ public class TodoMapperBusinessTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(MEDIUM)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.MEDIUM)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoEntity result = INSTANCE_MAPPER.toEntity(model);
@@ -166,14 +166,14 @@ public class TodoMapperBusinessTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(LOW)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.LOW)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoEntity result = INSTANCE_MAPPER.toEntity(model);
@@ -189,14 +189,14 @@ public class TodoMapperBusinessTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(null)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(null)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoEntity result = INSTANCE_MAPPER.toEntity(model);

@@ -25,14 +25,13 @@ public class TodoMapperTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.HIGH)
-                .status(Boolean.TRUE)
                 .build();
         TodoModel model = TodoModel.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoModel result = INSTANCE_MAPPER.toModel(dto);
@@ -48,7 +47,7 @@ public class TodoMapperTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         TodoResponseDto result = INSTANCE_MAPPER.toResponse(model);

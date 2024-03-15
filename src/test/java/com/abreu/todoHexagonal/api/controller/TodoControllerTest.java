@@ -51,14 +51,13 @@ class TodoControllerTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.HIGH)
-                .status(Boolean.TRUE)
                 .build();
         TodoModel model = TodoModel.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoResponseDto response = TodoResponseDto.builder().title("Test")
                 .id("1")
@@ -66,7 +65,7 @@ class TodoControllerTest {
                 .description("Test")
                 .dueDate(LocalDate.now())
                 .priority(Priority.HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         var json = new Gson().toJson(dto);
 
@@ -88,7 +87,7 @@ class TodoControllerTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoResponseDto response = TodoResponseDto.builder().title("Test")
                 .id("1")
@@ -96,7 +95,7 @@ class TodoControllerTest {
                 .description("Test")
                 .dueDate(LocalDate.now())
                 .priority(Priority.HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         when(service.getAllTodo()).thenReturn(List.of(model));
@@ -114,7 +113,7 @@ class TodoControllerTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
         TodoResponseDto response = TodoResponseDto.builder().title("Test")
                 .id("1")
@@ -122,7 +121,7 @@ class TodoControllerTest {
                 .description("Test")
                 .dueDate(LocalDate.now())
                 .priority(Priority.HIGH)
-                .status(Boolean.TRUE)
+                .completed(Boolean.TRUE)
                 .build();
 
         when(service.getTodoById("1")).thenReturn(model);
