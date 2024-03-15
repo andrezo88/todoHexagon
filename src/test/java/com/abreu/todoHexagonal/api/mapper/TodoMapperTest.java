@@ -31,7 +31,7 @@ public class TodoMapperTest {
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(HIGH)
-                .completed(Boolean.TRUE)
+                .completed(Boolean.FALSE)
                 .build();
 
         TodoModel result = INSTANCE_MAPPER.toModel(dto);
