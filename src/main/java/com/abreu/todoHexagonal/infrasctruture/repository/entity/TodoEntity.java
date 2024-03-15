@@ -25,5 +25,7 @@ public class TodoEntity {
 
     private Priority priority;
 
-    private Boolean status;
+    private Boolean isLate;
+
+    private Boolean completed;
 }

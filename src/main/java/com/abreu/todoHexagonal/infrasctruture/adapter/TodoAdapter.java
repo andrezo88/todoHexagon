@@ -36,10 +36,13 @@ public class TodoAdapter implements TodoPort {
 
     @Override
     public List<TodoModel> getAllTodos() {
-
         List<TodoEntity> entities = repository.findAll();
-
+        updateIsLate(entities);
         return entities.stream().map(mapper::toModel).toList();
+    }
+
+    private void updateIsLate(List<TodoEntity> entities) {
+        entities.stream().map(mapper::toModel).forEach(validationService::validateisLate);
     }
 
     @Override
