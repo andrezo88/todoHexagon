@@ -1,11 +1,8 @@
 package com.abreu.todoHexagonal.business.model;
 
-import com.abreu.todoHexagonal.configuration.adapter.LocalDateTimeTypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
 import lombok.Builder;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Builder(toBuilder = true)
 public record TodoModel(
@@ -16,13 +13,7 @@ public record TodoModel(
         Priority priority,
         boolean isLate,
         boolean completed,
-        StatusEnum status,
-        @JsonAdapter(LocalDateTimeTypeAdapter.class)
-        LocalDateTime createdAt
+        StatusEnum status
 ) {
-    public static class TodoModelBuilder {
-        LocalDateTime createdAt = LocalDateTime.now();
-    }
-
 
 }

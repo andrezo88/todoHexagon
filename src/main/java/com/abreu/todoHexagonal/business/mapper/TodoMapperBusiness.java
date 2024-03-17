@@ -20,5 +20,6 @@ public interface TodoMapperBusiness {
     TodoModel toModel(TodoEntity entity);
 
     @Mapping(target = "status", source = "status", defaultValue = "TO_DO")
+    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())")
     TodoEntity toEntity(TodoModel model);
 }

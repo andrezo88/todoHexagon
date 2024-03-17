@@ -24,4 +24,5 @@ public class TodoEntity {
     private Boolean completed;
     private StatusEnum status;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
