@@ -16,16 +16,10 @@ import java.time.LocalDate;
 public class TodoEntity {
     @Id
     private String id;
-
     private String title;
-
     private String description;
-
     private LocalDate dueDate;
-
     private Priority priority;
-
-    private Boolean isLate;
-
     private Boolean completed;
+    private StatusEnum status;
 }

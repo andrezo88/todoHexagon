@@ -24,21 +24,4 @@ public class ValidationService {
             throw new BadRequestException("Date cannot be in the past");
         }
     }
-
-    public void validateisLate(TodoModel date) {
-        if (date.dueDate().isBefore(LocalDate.now()) && !date.completed()) {
-            TodoModel updatedTodo = new TodoModel(
-                    date.id(),
-                    date.title(),
-                    date.description(),
-                    date.dueDate(),
-                    date.priority(),
-                    true,
-                    false
-            );
-            var entity = mapper.toEntity(updatedTodo);
-            repository.save(entity);
-        }
-    }
-
 }
