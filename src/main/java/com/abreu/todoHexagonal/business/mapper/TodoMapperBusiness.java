@@ -19,5 +19,6 @@ public interface TodoMapperBusiness {
     @Mapping(target = "isLate", source = "entity", qualifiedByName = "isLateTodoDate")
     TodoModel toModel(TodoEntity entity);
 
+    @Mapping(target = "status", source = "status", defaultValue = "TO_DO")
     TodoEntity toEntity(TodoModel model);
 }

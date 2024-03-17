@@ -21,7 +21,6 @@ public record TodoRequestDto(
         @JsonAdapter(LocalDateTypeAdapter.class)
         LocalDate dueDate,
         @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-        Priority priority,
-        Boolean status
+        Priority priority
 ) {
 }
