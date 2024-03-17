@@ -20,5 +20,6 @@ public class TodoEntity {
     private String description;
     private LocalDate dueDate;
     private Priority priority;
+    private Boolean completed;
     private StatusEnum status;
 }
