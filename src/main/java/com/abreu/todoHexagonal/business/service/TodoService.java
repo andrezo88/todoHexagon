@@ -27,4 +27,8 @@ public class TodoService {
     public TodoModel getTodoById(String id) {
         return port.getTodoById(id);
     }
+
+    public TodoModel updateTodoById(String id, TodoModel model) {
+        return port.updateTodoById(id, model);
+    }
 }

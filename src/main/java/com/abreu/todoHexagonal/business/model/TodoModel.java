@@ -15,5 +15,4 @@ public record TodoModel(
         boolean completed,
         StatusEnum status
 ) {
-
 }

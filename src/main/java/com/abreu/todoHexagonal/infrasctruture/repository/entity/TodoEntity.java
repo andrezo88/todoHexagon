@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Document(collection = "todo")
 @Builder
@@ -24,5 +25,5 @@ public class TodoEntity {
     private Boolean completed;
     private StatusEnum status;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private List<LocalDateTime> updatedAt;
 }
