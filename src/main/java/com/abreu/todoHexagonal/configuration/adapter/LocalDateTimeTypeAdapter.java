@@ -2,6 +2,7 @@ package com.abreu.todoHexagonal.configuration.adapter;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import org.springframework.context.annotation.Configuration;
 
@@ -38,10 +39,11 @@ public class LocalDateTimeTypeAdapter extends TypeAdapter<LocalDateTime> impleme
 
     @Override
     public LocalDateTime read(JsonReader in) throws IOException {
-        if (in != null) {
-            return parse(in.nextString(), formatter);
-        } else {
+        if (in.peek() == JsonToken.NULL) {
+            in.nextNull();
             return null;
+        } else {
+            return LocalDateTime.parse(in.nextString(), formatter);
         }
     }
 }

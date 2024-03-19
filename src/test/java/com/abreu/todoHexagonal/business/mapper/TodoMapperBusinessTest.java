@@ -224,6 +224,38 @@ public class TodoMapperBusinessTest {
     }
 
     @Test
+    void shouldMapToEntityUpdate() {
+
+        TodoModel model = TodoModel.builder()
+                .priority(MEDIUM)
+                .build();
+        TodoEntity entity = TodoEntity.builder()
+                .priority(Priority.HIGH)
+                .createdAt(java.time.LocalDateTime.now())
+                .build();
+
+        INSTANCE_MAPPER.toEntityUpdate(model, entity);
+
+        assertEquals(1, entity.getUpdatedAt().size());
+    }
+
+    @Test
+    void shouldMaoToModelUpdate() {
+
+        TodoModel model = TodoModel.builder()
+                .priority(MEDIUM)
+                .build();
+        TodoEntity entity = TodoEntity.builder()
+                .priority(Priority.MEDIUM)
+                .createdAt(java.time.LocalDateTime.now())
+                .build();
+
+        TodoModel result = INSTANCE_MAPPER.toModelUpdate(entity);
+
+        assertEquals(result.priority(), model.priority());
+    }
+
+    @Test
     void shouldReturnNullWhenTodoModelIsNull() {
 
         TodoEntity result = INSTANCE_MAPPER.toEntity(null);

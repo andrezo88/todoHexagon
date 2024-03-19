@@ -4,9 +4,11 @@ import com.abreu.todoHexagonal.configuration.adapter.LocalDateTypeAdapter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.gson.annotations.JsonAdapter;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
 import java.time.LocalDate;
 
+@Builder
 public record TodoUpdateDto(
         String title,
         @Size(max = 100)
