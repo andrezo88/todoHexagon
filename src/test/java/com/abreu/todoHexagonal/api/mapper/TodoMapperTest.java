@@ -3,6 +3,7 @@ package com.abreu.todoHexagonal.api.mapper;
 import com.abreu.todoHexagonal.api.dto.Priority;
 import com.abreu.todoHexagonal.api.dto.TodoRequestDto;
 import com.abreu.todoHexagonal.api.dto.TodoResponseDto;
+import com.abreu.todoHexagonal.api.dto.TodoUpdateDto;
 import com.abreu.todoHexagonal.business.model.TodoModel;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -10,6 +11,7 @@ import org.mapstruct.factory.Mappers;
 import java.time.LocalDate;
 
 import static com.abreu.todoHexagonal.business.model.Priority.HIGH;
+import static com.abreu.todoHexagonal.business.model.Priority.MEDIUM;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoMapperTest {
@@ -55,4 +57,20 @@ public class TodoMapperTest {
         assertEquals(result.description(), model.description());
         assertEquals(result.dueDate(), model.dueDate());
     }
+
+    @Test
+    void shouldMapToModelUpdate() {
+
+        TodoUpdateDto dto = TodoUpdateDto.builder()
+                .priority(Priority.MEDIUM)
+                .build();
+        TodoModel model = TodoModel.builder()
+                .priority(MEDIUM)
+                .build();
+
+        TodoModel result = INSTANCE_MAPPER.toModelUpdate(dto);
+
+        assertEquals(result.priority(), model.priority());
+    }
+
 }

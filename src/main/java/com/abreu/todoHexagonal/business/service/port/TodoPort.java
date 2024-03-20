@@ -12,4 +12,6 @@ public interface TodoPort {
     List<TodoModel> getAllTodos();
 
     TodoModel getTodoById(String id);
+
+    TodoModel updateTodoById(String id, TodoModel model);
 }

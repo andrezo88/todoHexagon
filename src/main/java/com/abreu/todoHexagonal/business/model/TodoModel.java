@@ -4,7 +4,7 @@ import lombok.Builder;
 
 import java.time.LocalDate;
 
-@Builder
+@Builder(toBuilder = true)
 public record TodoModel(
         String id,
         String title,

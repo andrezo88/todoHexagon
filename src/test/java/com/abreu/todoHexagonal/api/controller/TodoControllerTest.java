@@ -3,6 +3,7 @@ package com.abreu.todoHexagonal.api.controller;
 import com.abreu.todoHexagonal.api.dto.Priority;
 import com.abreu.todoHexagonal.api.dto.TodoRequestDto;
 import com.abreu.todoHexagonal.api.dto.TodoResponseDto;
+import com.abreu.todoHexagonal.api.dto.TodoUpdateDto;
 import com.abreu.todoHexagonal.api.mapper.TodoMapper;
 import com.abreu.todoHexagonal.business.model.TodoModel;
 import com.abreu.todoHexagonal.business.service.TodoService;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = TodoController.class)
@@ -131,6 +133,38 @@ class TodoControllerTest {
                 .andExpect(status().isOk());
 
         verify(port).getTodoById("1");
-
     }
+
+    @Test
+    void shouldUpdateTodo() throws Exception {
+        TodoUpdateDto dto = TodoUpdateDto.builder()
+                .priority(Priority.MEDIUM)
+                .build();
+        TodoModel model = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(HIGH)
+                .completed(Boolean.TRUE)
+                .build();
+        TodoResponseDto response = TodoResponseDto.builder().title("Test")
+                .id("1")
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.now())
+                .priority(Priority.MEDIUM)
+                .completed(Boolean.TRUE)
+                .build();
+        var json = new Gson().toJson(dto);
+
+        when(mapper.toModelUpdate(dto)).thenReturn(model);
+        when(service.updateTodoById("1", model)).thenReturn(model);
+        when(mapper.toResponse(mapper.toModelUpdate(dto))).thenReturn(response);
+
+        mockMvc.perform(patch("/api/v1/todo/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(status().isOk());
+    }
+
 }

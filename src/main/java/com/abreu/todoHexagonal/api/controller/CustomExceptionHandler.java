@@ -3,7 +3,6 @@ package com.abreu.todoHexagonal.api.controller;
 import com.abreu.todoHexagonal.api.dto.ErrorResponse;
 import com.abreu.todoHexagonal.business.exception.BadRequestException;
 import com.abreu.todoHexagonal.business.exception.IdNotFoundException;
-import com.abreu.todoHexagonal.business.exception.IllegalArgumentException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -39,15 +38,6 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException ex) {
-        ErrorResponse err = ErrorResponse.builder()
-                .status(HttpStatus.BAD_REQUEST.value())
-                .message(ex.getMessage())
-                .build();
-        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
         ErrorResponse err = ErrorResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message(ex.getMessage())

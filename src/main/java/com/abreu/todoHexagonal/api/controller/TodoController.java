@@ -2,6 +2,7 @@ package com.abreu.todoHexagonal.api.controller;
 
 import com.abreu.todoHexagonal.api.dto.TodoRequestDto;
 import com.abreu.todoHexagonal.api.dto.TodoResponseDto;
+import com.abreu.todoHexagonal.api.dto.TodoUpdateDto;
 import com.abreu.todoHexagonal.api.mapper.TodoMapper;
 import com.abreu.todoHexagonal.business.model.TodoModel;
 import com.abreu.todoHexagonal.business.service.port.TodoPort;
@@ -49,6 +50,16 @@ public class TodoController {
     public ResponseEntity<TodoResponseDto> getTodoById(@PathVariable String id) {
 
         TodoModel todo = service.getTodoById(id);
+        TodoResponseDto response = mapper.toResponse(todo);
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<TodoResponseDto> updateTodo(@PathVariable String id, @Valid @RequestBody TodoUpdateDto dto) {
+
+        TodoModel model = mapper.toModelUpdate(dto);
+        TodoModel todo = service.updateTodoById(id, model);
         TodoResponseDto response = mapper.toResponse(todo);
 
         return ResponseEntity.ok().body(response);

@@ -1,5 +1,6 @@
 package com.abreu.todoHexagonal.business.mapper;
 
+import com.abreu.todoHexagonal.business.model.StatusEnum;
 import com.abreu.todoHexagonal.business.model.TodoModel;
 import com.abreu.todoHexagonal.infrasctruture.repository.entity.Priority;
 import com.abreu.todoHexagonal.infrasctruture.repository.entity.TodoEntity;
@@ -9,6 +10,7 @@ import org.mapstruct.factory.Mappers;
 import java.time.LocalDate;
 
 import static com.abreu.todoHexagonal.business.model.Priority.*;
+import static com.abreu.todoHexagonal.infrasctruture.repository.entity.StatusEnum.TO_DO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -121,6 +123,7 @@ public class TodoMapperBusinessTest {
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(HIGH)
                 .completed(Boolean.TRUE)
+                .status(StatusEnum.TO_DO)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
@@ -128,9 +131,12 @@ public class TodoMapperBusinessTest {
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.HIGH)
                 .completed(Boolean.TRUE)
+                .status(TO_DO)
+                .createdAt(java.time.LocalDateTime.now())
                 .build();
 
         TodoEntity result = INSTANCE_MAPPER.toEntity(model);
+        result.setCreatedAt(entity.getCreatedAt());
 
         assertEquals(result, entity);
     }
@@ -144,6 +150,7 @@ public class TodoMapperBusinessTest {
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(MEDIUM)
                 .completed(Boolean.TRUE)
+                .status(StatusEnum.TO_DO)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
@@ -151,9 +158,12 @@ public class TodoMapperBusinessTest {
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.MEDIUM)
                 .completed(Boolean.TRUE)
+                .status(TO_DO)
+                .createdAt(java.time.LocalDateTime.now())
                 .build();
 
         TodoEntity result = INSTANCE_MAPPER.toEntity(model);
+        result.setCreatedAt(entity.getCreatedAt());
 
         assertEquals(result, entity);
     }
@@ -167,6 +177,7 @@ public class TodoMapperBusinessTest {
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(LOW)
                 .completed(Boolean.TRUE)
+                .status(StatusEnum.TO_DO)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
@@ -174,9 +185,12 @@ public class TodoMapperBusinessTest {
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(Priority.LOW)
                 .completed(Boolean.TRUE)
+                .status(TO_DO)
+                .createdAt(java.time.LocalDateTime.now())
                 .build();
 
         TodoEntity result = INSTANCE_MAPPER.toEntity(model);
+        result.setCreatedAt(entity.getCreatedAt());
 
         assertEquals(result, entity);
     }
@@ -190,18 +204,55 @@ public class TodoMapperBusinessTest {
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(null)
                 .completed(Boolean.TRUE)
+                .status(StatusEnum.TO_DO)
                 .build();
         TodoEntity entity = TodoEntity.builder()
                 .title("Test")
                 .description("Test")
                 .dueDate(LocalDate.parse("2025-01-01"))
                 .priority(null)
+                .status(TO_DO)
+                .createdAt(java.time.LocalDateTime.now())
                 .completed(Boolean.TRUE)
                 .build();
 
         TodoEntity result = INSTANCE_MAPPER.toEntity(model);
 
+        result.setCreatedAt(entity.getCreatedAt());
+
         assertEquals(result, entity);
+    }
+
+    @Test
+    void shouldMapToEntityUpdate() {
+
+        TodoModel model = TodoModel.builder()
+                .priority(MEDIUM)
+                .build();
+        TodoEntity entity = TodoEntity.builder()
+                .priority(Priority.HIGH)
+                .createdAt(java.time.LocalDateTime.now())
+                .build();
+
+        INSTANCE_MAPPER.toEntityUpdate(model, entity);
+
+        assertEquals(1, entity.getUpdatedAt().size());
+    }
+
+    @Test
+    void shouldMaoToModelUpdate() {
+
+        TodoModel model = TodoModel.builder()
+                .priority(MEDIUM)
+                .build();
+        TodoEntity entity = TodoEntity.builder()
+                .priority(Priority.MEDIUM)
+                .createdAt(java.time.LocalDateTime.now())
+                .build();
+
+        TodoModel result = INSTANCE_MAPPER.toModelUpdate(entity);
+
+        assertEquals(result.priority(), model.priority());
     }
 
     @Test
