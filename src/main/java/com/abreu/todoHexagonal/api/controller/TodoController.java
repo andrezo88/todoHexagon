@@ -5,7 +5,7 @@ import com.abreu.todoHexagonal.api.dto.TodoResponseDto;
 import com.abreu.todoHexagonal.api.dto.TodoUpdateDto;
 import com.abreu.todoHexagonal.api.mapper.TodoMapper;
 import com.abreu.todoHexagonal.business.model.TodoModel;
-import com.abreu.todoHexagonal.business.service.port.TodoPort;
+import com.abreu.todoHexagonal.business.service.TodoService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +17,11 @@ import java.util.List;
 
 public class TodoController {
 
-    private final TodoPort service;
+    private final TodoService service;
 
     private final TodoMapper mapper;
 
-    public TodoController(TodoPort service, TodoMapper mapper) {
+    public TodoController(TodoService service, TodoMapper mapper) {
         this.service = service;
         this.mapper = mapper;
     }
@@ -30,7 +30,7 @@ public class TodoController {
     public ResponseEntity<TodoResponseDto> createTodo(@Valid @RequestBody TodoRequestDto dto) {
 
         TodoModel model = mapper.toModel(dto);
-        TodoModel todo = service.createTodo(model);
+        TodoModel todo = service.createdTodo(model);
         TodoResponseDto response = mapper.toResponse(todo);
 
         return ResponseEntity.ok().body(response);
@@ -39,7 +39,7 @@ public class TodoController {
     @GetMapping
     public ResponseEntity<List<TodoResponseDto>> getAllTodos() {
         return ResponseEntity.ok().body(
-                service.getAllTodos()
+                service.getAllTodo()
                         .stream()
                         .map(mapper::toResponse)
                         .toList());

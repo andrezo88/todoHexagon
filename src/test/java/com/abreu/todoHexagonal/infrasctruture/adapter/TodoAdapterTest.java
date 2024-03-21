@@ -1,6 +1,5 @@
 package com.abreu.todoHexagonal.infrasctruture.adapter;
 
-import com.abreu.todoHexagonal.business.exception.BadRequestException;
 import com.abreu.todoHexagonal.business.exception.IdNotFoundException;
 import com.abreu.todoHexagonal.business.mapper.TodoMapperBusiness;
 import com.abreu.todoHexagonal.business.model.Priority;
@@ -65,29 +64,9 @@ class TodoAdapterTest {
         var result = adapter.createTodo(todo);
 
         assertEquals(todo, result);
-        verify(validationService).validatePastDate(todo);
         verify(mapper).toEntity(todo);
         verify(repository).save(entity);
         verify(mapper).toModel(entity);
-    }
-
-    @Test
-    void shouldReturnErrorWhenCreateTodoWithPastDate() {
-        TodoModel todo = TodoModel.builder()
-                .title("Title")
-                .description("Description")
-                .dueDate(LocalDate.parse("2020-12-12"))
-                .priority(Priority.HIGH)
-                .build();
-
-        doThrow(new BadRequestException("Date cannot be in the past"))
-                .when(validationService).validatePastDate(any(TodoModel.class));
-
-        assertThatThrownBy(() -> adapter.createTodo(todo))
-                .isInstanceOf(BadRequestException.class)
-                .hasMessageContaining("Date cannot be in the past");
-
-        verify(validationService).validatePastDate(todo);
     }
 
     @Test

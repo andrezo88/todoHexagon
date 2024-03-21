@@ -9,9 +9,10 @@ import java.time.LocalDate;
 @Service
 public class ValidationService {
 
-    public void validatePastDate(TodoModel date) {
+    public Boolean validatePastDate(TodoModel date) {
         if (date.dueDate().isBefore(LocalDate.now())) {
             throw new BadRequestException("Date cannot be in the past");
         }
+        return true;
     }
 }

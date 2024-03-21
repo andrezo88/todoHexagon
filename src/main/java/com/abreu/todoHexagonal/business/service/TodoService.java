@@ -10,13 +10,16 @@ import java.util.List;
 public class TodoService {
 
     private final TodoPort port;
+    private final ValidationService validationService;
 
-    public TodoService(TodoPort port) {
+    public TodoService(TodoPort port, ValidationService validationService) {
         this.port = port;
+        this.validationService = validationService;
     }
 
 
     public TodoModel createdTodo(TodoModel todo) {
+        validationService.validatePastDate(todo);
         return port.createTodo(todo);
     }
 

@@ -7,7 +7,6 @@ import com.abreu.todoHexagonal.api.dto.TodoUpdateDto;
 import com.abreu.todoHexagonal.api.mapper.TodoMapper;
 import com.abreu.todoHexagonal.business.model.TodoModel;
 import com.abreu.todoHexagonal.business.service.TodoService;
-import com.abreu.todoHexagonal.business.service.port.TodoPort;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +37,6 @@ class TodoControllerTest {
 
     @MockBean
     TodoMapper mapper;
-
-    @MockBean
-    TodoPort port;
 
     @Autowired
     MockMvc mockMvc;
@@ -132,7 +128,7 @@ class TodoControllerTest {
         mockMvc.perform(get("/api/v1/todo/1"))
                 .andExpect(status().isOk());
 
-        verify(port).getTodoById("1");
+        verify(service).getTodoById("1");
     }
 
     @Test

@@ -3,7 +3,6 @@ package com.abreu.todoHexagonal.infrasctruture.adapter;
 import com.abreu.todoHexagonal.business.exception.IdNotFoundException;
 import com.abreu.todoHexagonal.business.mapper.TodoMapperBusiness;
 import com.abreu.todoHexagonal.business.model.TodoModel;
-import com.abreu.todoHexagonal.business.service.ValidationService;
 import com.abreu.todoHexagonal.business.service.port.TodoPort;
 import com.abreu.todoHexagonal.infrasctruture.repository.TodoRepository;
 import com.abreu.todoHexagonal.infrasctruture.repository.entity.TodoEntity;
@@ -17,17 +16,14 @@ public class TodoAdapter implements TodoPort {
 
     private final TodoRepository repository;
     private final TodoMapperBusiness mapper;
-    private final ValidationService validationService;
 
-    public TodoAdapter(TodoRepository repository, TodoMapperBusiness mapper, ValidationService validationService) {
+    public TodoAdapter(TodoRepository repository, TodoMapperBusiness mapper) {
         this.repository = repository;
         this.mapper = mapper;
-        this.validationService = validationService;
     }
 
     @Override
     public TodoModel createTodo(TodoModel todo) {
-        validationService.validatePastDate(todo);
         TodoEntity entity = mapper.toEntity(todo);
         TodoEntity saved = repository.save(entity);
         return mapper.toModel(saved);
