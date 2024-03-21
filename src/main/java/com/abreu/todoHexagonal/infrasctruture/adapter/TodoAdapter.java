@@ -54,7 +54,6 @@ public class TodoAdapter implements TodoPort {
                 .orElseThrow(() -> new IdNotFoundException(
                         String.format("Todo with id %s not found", id)));
         mapper.toEntityUpdate(model, entity);
-        entity.setId(id);
         TodoEntity saved = repository.save(entity);
         return mapper.toModelUpdate(saved);
     }
