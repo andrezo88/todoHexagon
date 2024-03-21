@@ -16,7 +16,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -43,7 +42,6 @@ class TodoControllerTest {
 
     @Test
     void shouldCreateTodo() throws Exception {
-        URI uri = URI.create("/api/v1/todo/1");
         TodoRequestDto dto = TodoRequestDto.builder()
                 .title("Test")
                 .description("Test")

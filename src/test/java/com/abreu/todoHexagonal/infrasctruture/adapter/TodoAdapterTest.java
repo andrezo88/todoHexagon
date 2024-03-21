@@ -4,7 +4,6 @@ import com.abreu.todoHexagonal.business.exception.IdNotFoundException;
 import com.abreu.todoHexagonal.business.mapper.TodoMapperBusiness;
 import com.abreu.todoHexagonal.business.model.Priority;
 import com.abreu.todoHexagonal.business.model.TodoModel;
-import com.abreu.todoHexagonal.business.service.ValidationService;
 import com.abreu.todoHexagonal.infrasctruture.repository.TodoRepository;
 import com.abreu.todoHexagonal.infrasctruture.repository.entity.StatusEnum;
 import com.abreu.todoHexagonal.infrasctruture.repository.entity.TodoEntity;
@@ -32,9 +31,6 @@ class TodoAdapterTest {
 
     @Mock
     private TodoRepository repository;
-
-    @Mock
-    private ValidationService validationService;
 
     @InjectMocks
     private TodoAdapter adapter;
