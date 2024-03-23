@@ -1,12 +1,10 @@
 package com.abreu.todoHexagonal.business.mapper;
 
-import com.abreu.todoHexagonal.business.exception.BadRequestException;
 import com.abreu.todoHexagonal.business.model.TodoModel;
 import com.abreu.todoHexagonal.infrasctruture.repository.entity.TodoEntity;
 import org.mapstruct.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -28,11 +26,5 @@ public interface TodoMapperBusiness {
     @Mapping(target = "updatedAt", ignore = true)
     TodoEntity toEntity(TodoModel model);
 
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now())")
-    default void toEntityUpdate(TodoModel model, @MappingTarget TodoEntity entity) throws BadRequestException {
-        if (entity.getUpdatedAt() == null) {
-            entity.setUpdatedAt(new ArrayList<>());
-        }
-        entity.getUpdatedAt().add(java.time.LocalDateTime.now());
-    }
+    TodoEntity toEntityUpdate(TodoModel model, @MappingTarget TodoEntity entity);
 }

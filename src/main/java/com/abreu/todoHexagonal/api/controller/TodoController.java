@@ -64,4 +64,13 @@ public class TodoController {
 
         return ResponseEntity.ok().body(response);
     }
+
+    @PatchMapping("/{id}/complete")
+    public ResponseEntity<TodoResponseDto> completeTodo(@PathVariable String id) {
+
+        TodoModel todo = service.completeTodoById(id);
+        TodoResponseDto response = mapper.toResponse(todo);
+
+        return ResponseEntity.ok().body(response);
+    }
 }
