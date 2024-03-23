@@ -71,10 +71,9 @@ public class TodoAdapter implements TodoPort {
         return mapper.toModelUpdate(saved);
     }
 
-    public void peformUpdate(TodoModel model, TodoEntity entity) {
+    private void peformUpdate(TodoModel model, TodoEntity entity) {
         mapper.toEntityUpdate(model, entity);
         peformUpdateAt(entity);
-        repository.save(entity);
     }
 
     @Override
