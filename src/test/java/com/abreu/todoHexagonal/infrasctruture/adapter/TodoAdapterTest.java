@@ -172,5 +172,45 @@ class TodoAdapterTest {
         verify(repository).findById("1");
     }
 
+    @Test
+    void shouldCompleteTodoById() {
+        var entity = TodoEntity.builder()
+                .title("Title")
+                .description("Description")
+                .dueDate(LocalDate.parse("2021-12-12"))
+                .priority(HIGH)
+                .status(StatusEnum.TO_DO)
+                .build();
+
+        var todo = TodoModel.builder()
+                .title("Title")
+                .description("Description")
+                .dueDate(LocalDate.parse("2021-12-12"))
+                .priority(Priority.HIGH)
+                .status(TO_DO)
+                .build();
+
+        when(repository.findById("1")).thenReturn(java.util.Optional.of(entity));
+        when(repository.save(entity)).thenReturn(entity);
+        when(mapper.toModelUpdate(entity)).thenReturn(todo);
+
+        var result = adapter.completeTodoById("1");
+
+        assertEquals(todo, result);
+        verify(repository).findById("1");
+        verify(repository).save(entity);
+        verify(mapper).toModelUpdate(entity);
+    }
+
+    @Test
+    void shouldReturnErrorWhenCompleteTodoByIdNotFound() {
+        when(repository.findById("1")).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> adapter.completeTodoById("1"))
+                .isInstanceOf(IdNotFoundException.class)
+                .hasMessageContaining("Todo with id 1 not found");
+
+        verify(repository).findById("1");
+    }
 
 }

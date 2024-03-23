@@ -161,4 +161,32 @@ class TodoControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    void shouldCompleteTodo() throws Exception {
+        String id = "1";
+        TodoModel model = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(HIGH)
+                .completed(Boolean.TRUE)
+                .build();
+        TodoResponseDto response = TodoResponseDto.builder().title("Test")
+                .id(id)
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.now())
+                .priority(Priority.HIGH)
+                .completed(Boolean.TRUE)
+                .build();
+
+        when(service.completeTodoById("1")).thenReturn(model);
+        when(mapper.toResponse(model)).thenReturn(response);
+
+        mockMvc.perform(patch("/api/v1/todo/1/complete"))
+                .andExpect(status().isOk());
+
+        verify(service).completeTodoById("1");
+    }
+
 }

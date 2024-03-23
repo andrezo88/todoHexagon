@@ -2,6 +2,7 @@ package com.abreu.todoHexagonal.business.service;
 
 import com.abreu.todoHexagonal.business.exception.BadRequestException;
 import com.abreu.todoHexagonal.business.model.Priority;
+import com.abreu.todoHexagonal.business.model.StatusEnum;
 import com.abreu.todoHexagonal.business.model.TodoModel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +34,7 @@ class ValidationServiceTest {
     }
 
     @Test
-    void shouldNotThrowBadRequestException() {
+    void shouldNotThrowBadRequestExceptionWhenValidatePastDateIsTrue() {
         TodoModel todoModel = TodoModel.builder()
                 .title("Test")
                 .description("Test")
@@ -41,5 +42,96 @@ class ValidationServiceTest {
                 .priority(Priority.HIGH)
                 .build();
         assertThat(validationService.validatePastDate(todoModel)).isTrue();
+    }
+
+    @Test
+    void shoudlValidateIfTodoIsCompleted() {
+        TodoModel todoModel = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(Priority.HIGH)
+                .completed(true)
+                .build();
+        assertThatThrownBy(() -> validationService.validateCompleted(todoModel))
+                .isInstanceOf(BadRequestException.class)
+                .hasMessage("Todo is already completed");
+    }
+
+    @Test
+    void shouldNotThrowBadRequestExceptionWhenValidateCompletedIsTrue() {
+        TodoModel todoModel = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(Priority.HIGH)
+                .build();
+        assertThat(validationService.validateCompleted(todoModel)).isTrue();
+    }
+
+    @Test
+    void shouldThrowBadRequestExceptionWhenStatusIsTheSame() {
+        TodoModel todoModel = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(Priority.HIGH)
+                .status(StatusEnum.DONE)
+                .build();
+        TodoModel todoModelOld = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(Priority.HIGH)
+                .status(StatusEnum.DONE)
+                .build();
+        assertThatThrownBy(() -> validationService.validateStatus(todoModel, todoModelOld))
+                .isInstanceOf(BadRequestException.class)
+                .hasMessage("Status cannot be the same");
+    }
+
+    @Test
+    void shouldNotThrowBadRequestExceptionWhenValidateStatusIsTrue() {
+        TodoModel todoModel = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(Priority.HIGH)
+                .status(StatusEnum.DONE)
+                .build();
+        TodoModel todoModelOld = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(Priority.HIGH)
+                .status(StatusEnum.TO_DO)
+                .build();
+        assertThat(validationService.validateStatus(todoModel, todoModelOld)).isTrue();
+    }
+
+    @Test
+    void shouldThrowBadRequestExceptionWhenStatusIsDone() {
+        TodoModel todoModel = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(Priority.HIGH)
+                .status(StatusEnum.DONE)
+                .build();
+        assertThatThrownBy(() -> validationService.validateIFIsStatusDone(todoModel))
+                .isInstanceOf(BadRequestException.class)
+                .hasMessage("Status cannot be DONE");
+    }
+
+    @Test
+    void shouldNotThrowBadRequestExceptionWhenValidateIFIsStatusDoneIsTrue() {
+        TodoModel todoModel = TodoModel.builder()
+                .title("Test")
+                .description("Test")
+                .dueDate(LocalDate.parse("2025-01-01"))
+                .priority(Priority.HIGH)
+                .status(StatusEnum.TO_DO)
+                .build();
+        assertThat(validationService.validateIFIsStatusDone(todoModel)).isTrue();
     }
 }

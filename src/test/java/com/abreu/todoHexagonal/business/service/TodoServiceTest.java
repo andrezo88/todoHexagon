@@ -82,4 +82,11 @@ class TodoServiceTest {
         todoService.updateTodoById("1", null);
         verify(todoPort).updateTodoById("1", null);
     }
+
+    @Test
+    void testCompleteTodoById() {
+        when(todoPort.completeTodoById("1")).thenReturn(null);
+        todoService.completeTodoById("1");
+        verify(todoPort).completeTodoById("1");
+    }
 }
