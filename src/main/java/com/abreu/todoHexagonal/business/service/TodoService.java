@@ -32,6 +32,15 @@ public class TodoService {
     }
 
     public TodoModel updateTodoById(String id, TodoModel model) {
+        validationService.validatePastDate(model);
+        validationService.validateStatus(model, port.getTodoById(id));
+        validationService.validateIFIsStatusDone(port.getTodoById(id));
+        validationService.validateCompleted(port.getTodoById(id));
         return port.updateTodoById(id, model);
+    }
+
+    public TodoModel completeTodoById(String id) {
+        validationService.validateCompleted(port.getTodoById(id));
+        return port.completeTodoById(id);
     }
 }

@@ -236,7 +236,7 @@ public class TodoMapperBusinessTest {
 
         INSTANCE_MAPPER.toEntityUpdate(model, entity);
 
-        assertEquals(1, entity.getUpdatedAt().size());
+        assertEquals(Priority.MEDIUM, entity.getPriority());
     }
 
     @Test

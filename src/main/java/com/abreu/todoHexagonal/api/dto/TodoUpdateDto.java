@@ -16,7 +16,9 @@ public record TodoUpdateDto(
         @JsonAdapter(LocalDateTypeAdapter.class)
         LocalDate dueDate,
         @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-        Priority priority
+        Priority priority,
+        @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+        StatusEnum status
 ) {
 
 }
