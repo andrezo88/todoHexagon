@@ -11,6 +11,7 @@ import java.time.LocalDate;
 public class ValidationService {
 
     public Boolean validatePastDate(TodoModel date) {
+        date = date.toBuilder().dueDate(setDefaultDate(date.dueDate())).build();
         if (date.dueDate().isBefore(LocalDate.now())) {
             throw new BadRequestException("Date cannot be in the past");
         }
@@ -36,5 +37,12 @@ public class ValidationService {
             throw new BadRequestException("Status cannot be DONE");
         }
         return true;
+    }
+
+    private LocalDate setDefaultDate(LocalDate date) {
+        if (date == null) {
+            return LocalDate.now();
+        }
+        return date;
     }
 }
